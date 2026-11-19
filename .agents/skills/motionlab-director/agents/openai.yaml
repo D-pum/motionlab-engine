@@ -1,0 +1,4 @@
+interface:
+  display_name: "MotionLab Director"
+  short_description: "Direct and lock a MotionLab video plan"
+  default_prompt: "Use $motionlab-director to direct and produce a MotionLab video from this brief."

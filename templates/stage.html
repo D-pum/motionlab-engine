@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>MotionLab stage contract</title>
+<style>html,body{margin:0;background:#10151e}canvas{display:block;max-width:100vw;max-height:100vh}</style>
+<canvas id="stage"></canvas>
+<!-- Relative path works from templates/ or productions/FILM/index.html after adjustment below. -->
+<script src="../workflows/viz3d/viz3d.js"></script>
+<script>
+const THREE = Viz3D.THREE;
+const canvas = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, preserveDrawingBuffer:true});
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#10151e');
+const camera = new THREE.PerspectiveCamera(40, 9/16, 0.1, 100);
+camera.position.set(3,2,6); camera.lookAt(0,0,0);
+scene.add(new THREE.HemisphereLight(0xffffff,0x334466,2));
+const subject = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshStandardMaterial({color:0x6ec9e0}));
+scene.add(subject);
+window.OPENER = {
+  ready:true,
+  resize(width,height) {renderer.setSize(width,height,false); camera.aspect=width/height; camera.updateProjectionMatrix();},
+  seek(seconds) {subject.rotation.y=seconds; renderer.render(scene,camera);}
+};
+OPENER.resize(540,960); OPENER.seek(0);
+</script></html>

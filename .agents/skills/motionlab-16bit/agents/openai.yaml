@@ -1,0 +1,4 @@
+interface:
+  display_name: "MotionLab 16-bit"
+  short_description: "Plan and execute crisp pixel-art films"
+  default_prompt: "Use $motionlab-16bit to produce a pixel-art film from the episode brief."
