@@ -1,3 +1,6 @@
 ﻿* text=auto eol=lf
 *.sh text eol=lf
 
+
+# System snapshot: preserve original source bytes.
+* -text

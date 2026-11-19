@@ -1238,8 +1238,8 @@
     },
     {
       "path": "vendor/creator-generalist/.gitattributes",
-      "bytes": 43,
-      "sha256": "bb07ce1ad467d578c3d92078387f9638fcfdaab5bc85ef84b62883f2e53786e4"
+      "bytes": 103,
+      "sha256": "923e0ec728b0554724d45a60097f0abb6bb094723c851ab2c0cddae378daf2cf"
     },
     {
       "path": "vendor/creator-generalist/.gitignore",
@@ -4918,8 +4918,8 @@
     },
     {
       "path": "vendor/lemo-opuscar/.gitattributes",
-      "bytes": 128,
-      "sha256": "235b70c1e8c33dc4825d3e52a819fc8cfab80a65c7aa571bbbbcf8dc68afbbbf"
+      "bytes": 188,
+      "sha256": "c29c496b20616cf0e4c148a4f6b6f7aff2b75d3a6f683101487a35f01e7111c3"
     },
     {
       "path": "vendor/lemo-opuscar/.github/ISSUE_TEMPLATE/bug.yml",
