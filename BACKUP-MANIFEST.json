@@ -6715,6 +6715,11 @@
       "path": "verify_backup.py",
       "bytes": 618,
       "sha256": "1d2be128d83ce74691f74abc6dfd56f4169a3d411cd3b8b04beccd4335324521"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 98,
+      "sha256": "9003ec3698d4e59695aa0a641e7ceb6532707021f673e1f3b693c78071db4eb2"
     }
   ]
 }
