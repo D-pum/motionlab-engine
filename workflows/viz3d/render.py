@@ -62,9 +62,13 @@ def main():
     parser.add_argument("--start", type=float, default=0)
     parser.add_argument("--end", type=float)
     parser.add_argument("--fps", type=int, default=60)
+    parser.add_argument("--width", type=int, default=WIDTH)
+    parser.add_argument("--height", type=int, default=HEIGHT)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     fps = args.fps
+    if min(args.width, args.height) < 2 or args.width % 2 or args.height % 2:
+        parser.error("Choose positive even output dimensions.")
     end = args.duration if args.end is None else args.end
     if not all(map(isfinite, (args.duration, args.start, end))) or not 0 <= args.start < end <= args.duration or fps < 1:
         parser.error("Choose a positive frame rate and a range inside the production timeline.")
@@ -94,7 +98,7 @@ def main():
         if errors:
             raise RuntimeError("\n".join(errors))
         page.wait_for_function("window.OPENER?.ready", timeout=15000, polling=100)
-        page.evaluate(CONFIGURE, [WIDTH, HEIGHT, fps])
+        page.evaluate(CONFIGURE, [args.width, args.height, fps])
         with Popen(command, stdin=PIPE, creationflags=BELOW_NORMAL_PRIORITY_CLASS) as encoder:
             try:
                 batch = 2 * fps

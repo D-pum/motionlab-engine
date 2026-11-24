@@ -73,8 +73,8 @@
     },
     {
       "path": "requirements.txt",
-      "bytes": 20,
-      "sha256": "a855ad33fcda5c1157aa3dfd4c77affc97ed39451eef6d50b169ed18b8f64ad6"
+      "bytes": 34,
+      "sha256": "59788b42118a6b6f48421903e9bb62538a3d391ca709d77d331bf074658de7c0"
     },
     {
       "path": "skills/lemo-opuscar-codex/scripts/run.sh",
@@ -6723,8 +6723,8 @@
     },
     {
       "path": "workflows/viz3d/render.py",
-      "bytes": 5619,
-      "sha256": "aa606a64d79da0a18a2b7e07a7b99bf556555accf196f4ea76cdc4fca7114dcb"
+      "bytes": 5897,
+      "sha256": "aa6a808c05ba703b42e9d93c5fd16222c2e7a8fa4249a50b4a27c33eeba96a1d"
     },
     {
       "path": "workflows/viz3d/THREE-LICENSE.txt",
@@ -6750,6 +6750,86 @@
       "path": ".gitattributes",
       "bytes": 98,
       "sha256": "9003ec3698d4e59695aa0a641e7ceb6532707021f673e1f3b693c78071db4eb2"
+    },
+    {
+      "path": "tools/audio_mix.py",
+      "bytes": 8786,
+      "sha256": "ddb5b256287e39a84629baf2c8eb28066589a9631fcf53963c772275b6ea2ba0"
+    },
+    {
+      "path": "tools/render.py",
+      "bytes": 1018,
+      "sha256": "35a34491ce83051c5840829844a6660b11fab2cfefa660f35d42849f5de7ec0b"
+    },
+    {
+      "path": "tools/verify.py",
+      "bytes": 308,
+      "sha256": "1f267be6d22b97ac53b5dc7305c687883ad8c1e5826f680cc4b8080d39a94c82"
+    },
+    {
+      "path": "productions/07_mechanical_watch/scene.js",
+      "bytes": 12383,
+      "sha256": "b4eacc1011096b15484fb338c5cf4c794ec560ab8f7acb4387430e45180245b2"
+    },
+    {
+      "path": "productions/07_mechanical_watch/index.html",
+      "bytes": 292,
+      "sha256": "446666c8a4b183d10a8bafd86c729fb338bbf0de61b6faa691894d054a820336"
+    },
+    {
+      "path": "productions/07_mechanical_watch/production-plan.json",
+      "bytes": 11523,
+      "sha256": "3298739a9e561e4a73e4bff5463bbeeb9db3ba6ded0a69998fdcbd97599b68db"
+    },
+    {
+      "path": "productions/07_mechanical_watch/gen_sfx.py",
+      "bytes": 1621,
+      "sha256": "09bedc575190895bda42bb46d278f9d5fe65aca1093fdb8608795db34f31c4af"
+    },
+    {
+      "path": "productions/07_mechanical_watch/verify.py",
+      "bytes": 2270,
+      "sha256": "61327f5d4fe7d87693510dafaefd7b6cd837a414ea1c2bbbabce50aa2636c9ad"
+    },
+    {
+      "path": "productions/07_mechanical_watch/README.md",
+      "bytes": 2234,
+      "sha256": "640e33cddf9390a589424d84c9885ec3c07307c4e5d8a992bf673ee0fbd42101"
+    },
+    {
+      "path": "productions/07_mechanical_watch/CREDITS.md",
+      "bytes": 780,
+      "sha256": "316c83fa3f976d80783500957d44ba535f4d0efb97df63a25c8e9d6a5b2c8127"
+    },
+    {
+      "path": "assets/sfx/CREDITS.md",
+      "bytes": 444,
+      "sha256": "06cae9e092ff30748c6209c256bc9fd6d9485b39f608b729da94183943d24e6d"
+    },
+    {
+      "path": "assets/sfx/fan_interval.wav",
+      "bytes": 531140,
+      "sha256": "4c0287ffdad82a7001403c82ab77e2a04475fb30c9919938b311f644f429c531"
+    },
+    {
+      "path": "assets/sfx/lightclunk1.wav",
+      "bytes": 32812,
+      "sha256": "d5a2aa8764c02924f6ed6fbaad0c650ab2d57ec57a626cee9e6645f941dbc8fa"
+    },
+    {
+      "path": "assets/sfx/tick.wav",
+      "bytes": 27180,
+      "sha256": "60560c1f4b0c5c29372e00eda67946e554315552b5074f06d9cab0b2baac5464"
+    },
+    {
+      "path": "assets/sfx/tick2.wav",
+      "bytes": 10892,
+      "sha256": "04bac4bd61801e6dc1b26b89c6664d774b1408f8398668bf0c7d155e57331cca"
+    },
+    {
+      "path": "assets/sfx/watch_rewind.wav",
+      "bytes": 531174,
+      "sha256": "01a82b91588d7ebea3b853193681786f78410d291827bf68e7d8b6437dc27d12"
     }
   ]
 }

@@ -1,0 +1,234 @@
+{
+  "status": "frozen",
+  "title": "How a Mechanical Watch Keeps Time With ZERO Batteries",
+  "format": "mechanical-visual-explainer",
+  "output": {
+    "portrait": {
+      "width": 1080,
+      "height": 1920
+    },
+    "landscape": {
+      "width": 1920,
+      "height": 1080
+    },
+    "fps": 60,
+    "duration_s": 42.0,
+    "codec": "H.264",
+    "audio": "AAC 48kHz"
+  },
+  "skin": "8bit",
+  "use3D": true,
+  "stage": {
+    "safeBox": true,
+    "note": "Scene uses stage.safeBox() to ensure all content is visible in both portrait (1080x1920) and landscape (1920x1080) orientations"
+  },
+  "palette": {
+    "background": "#0A0A0F",
+    "brushed_steel": "#B0B8C0",
+    "polished_brass": "#D4A017",
+    "ruby_jewel": "#EF4444",
+    "ruby_emissive": "#EF4444",
+    "mainspring_glow": "#22D3EE",
+    "highlight_spark": "#FBBF24",
+    "hud_text": "#67E8F9",
+    "hud_dim": "#1E3A5F"
+  },
+  "narration_script": [
+    {
+      "time": 0.2,
+      "text": "Zero batteries. Zero microchips. Yet this coiled strip of steel counts six hundred ninety-one thousand exact beats every single day."
+    },
+    {
+      "time": 6.0,
+      "text": "Remove one tiny part... and all that stored energy explodes out in half a second."
+    },
+    {
+      "time": 11.5,
+      "text": "So engineers lock it behind a mechanical gate called the escapement."
+    },
+    {
+      "time": 16.5,
+      "text": "Slow time down fifty times. Watch the ruby fork trap the gear... releasing just one tooth per swing."
+    },
+    {
+      "time": 25.0,
+      "text": "That rhythm comes from the balance wheel, breathing back and forth eight times every second."
+    },
+    {
+      "time": 33.0,
+      "text": "Now watch the gear train turn those eight tiny ticks... into seconds, minutes, and hours."
+    }
+  ],
+  "beats": [
+    {
+      "id": "A",
+      "range_s": [
+        0.0,
+        6.0
+      ],
+      "action": "Angled 3/4 macro orbit over the ticking 3D movement at 8 beats/sec (28,800 VPH). Viewer sees the full layered movement \u00e2\u20ac\u201d mainspring barrel, gear train, escapement, balance wheel \u00e2\u20ac\u201d all ticking in sync.",
+      "camera": "Elevated 3/4 orbit, slow continuous arc (~15\u00c2\u00b0 over 6s), slight zoom drift in. FOV 45\u00c2\u00b0.",
+      "treatment": "Full 3D metallic/emissive Three.js geometry. Brushed steel plates, polished brass gears, glowing ruby jewels, coiled glowing mainspring.",
+      "continuity": "Establishes the complete movement. Balance wheel oscillation and escape wheel tooth-by-tooth advance are the anchors carried forward.",
+      "sound": "Crisp alternating tick/tock at 8Hz (4 Hz balance = 8 ticks/sec). Subtle mechanical ambient bed.",
+      "hud": "FREQ: 28,800 VPH | TICKS/SEC: 8 | SPRING: 100% | TIME SCALE: 1\u00c3\u2014"
+    },
+    {
+      "id": "B",
+      "range_s": [
+        6.0,
+        11.5
+      ],
+      "action": "Pallet fork lifts up and out of frame. Mainspring violently unwinds in 0.6s, spinning the entire gear train into a chaotic glowing blur. Camera shake. At ~10.5s, snap-rewind smoothly back into locked position.",
+      "camera": "Hold on movement center, slight push-in. Add camera shake during unwind (frequency 20Hz, amplitude 3px). Smooth ease-out as mechanism re-locks.",
+      "treatment": "Same 3D scene. Escape wheel spins to blur with motion trail. Mainspring barrel uncoils with cyan glow intensifying. Gear train RPM goes extreme.",
+      "continuity": "The lift of the pallet fork is the cause \u00e2\u2020\u2019 chaos is the consequence. Rewind restores order, connecting to next beat where escapement is explained.",
+      "sound": "At 6.0s: violent spinning whir/unspooling burst. Tick/tock stops. At 10.5s: rewind whoosh. Ticking resumes.",
+      "hud": "SPRING: rapidly drops 100\u00e2\u2020\u20190% during unwind, snaps back to 100% on rewind. TIME SCALE flashes '\u00e2\u02c6\u017e\u00c3\u2014' during chaos."
+    },
+    {
+      "id": "C",
+      "range_s": [
+        11.5,
+        16.5
+      ],
+      "action": "Zoom tight onto the pallet fork dropping cleanly back between the escape-wheel teeth. The fork meshes precisely with the wheel.",
+      "camera": "Fast zoom from medium to extreme close-up on escapement. Hold tight. FOV narrows to 25\u00c2\u00b0.",
+      "treatment": "3D close-up. Ruby pallet stones glow. Escape wheel teeth are individually modeled and lit. Fork pivot axis clearly visible.",
+      "continuity": "From chaos restoration to mechanical precision. The escapement is now the focal subject.",
+      "sound": "Ticking resumes at real-time 8Hz. Each tooth engagement gets a crisp click.",
+      "hud": "TICKS/SEC: 8 | TIME SCALE: 1\u00c3\u2014"
+    },
+    {
+      "id": "D",
+      "range_s": [
+        16.5,
+        25.0
+      ],
+      "action": "50\u00c3\u2014 slow-motion close-up on the ruby pallet stones locking, unlocking, and releasing ONE escape-wheel tooth per half-swing. Crisp spark/impulse highlights at each engagement.",
+      "camera": "Extreme close-up, slight orbit around the escapement pivot. Camera tracks the pallet fork swing. FOV 20\u00c2\u00b0.",
+      "treatment": "3D slow-motion. Each tooth release gets a bright spark highlight (#FBBF24 emissive flash). Ruby stones pulse on lock/unlock. Motion is 50\u00c3\u2014 slower.",
+      "continuity": "Detailed mechanism explanation. The viewer sees exactly how one tooth is released per swing, connecting to the balance wheel in the next beat.",
+      "sound": "Tick/tock slowed 50\u00c3\u2014 and deepened. Each impulse gets a resonant metallic ping.",
+      "hud": "TICKS/SEC: 0.16 | TIME SCALE: 50\u00c3\u2014 SLOW | visible tooth count indicator"
+    },
+    {
+      "id": "E",
+      "range_s": [
+        25.0,
+        33.0
+      ],
+      "action": "Pan smoothly to the oscillating balance wheel and spiral hairspring expanding/contracting symmetrically at 4 Hz (8 ticks/sec in real-time, shown at ~2\u00c3\u2014 slow initially, ramping back to real-time).",
+      "camera": "Smooth pan from escapement to balance wheel. Settle into slight orbit. FOV 30\u00c2\u00b0.",
+      "treatment": "3D. Hairspring is a glowing spiral that breathes. Balance wheel has visible mass and inertia. Metallic reflections.",
+      "continuity": "Connect the escapement's rhythm to its source \u00e2\u20ac\u201d the balance wheel. Same ticking frequency carries across.",
+      "sound": "Ticking ramps from slow back to real-time 8Hz over the beat.",
+      "hud": "FREQ: 28,800 VPH | TICKS/SEC: ramping 0.16\u00e2\u2020\u20198"
+    },
+    {
+      "id": "F",
+      "range_s": [
+        33.0,
+        42.0
+      ],
+      "action": "Pull back to full movement. Stepped brass gears drive crisp watch hands (Seconds, Minutes, Hours) snapping back to real-time 8 ticks/sec. Final 2.5s = pure hypnotic ticking.",
+      "camera": "Pull-back zoom from balance wheel to full movement view. Smooth orbit resumes. FOV widens to 45\u00c2\u00b0.",
+      "treatment": "3D full view. Watch hands on a dial face above the movement. Second hand ticks 8\u00c3\u2014/sec. Minute/hour hands barely move. All gears visible and meshing.",
+      "continuity": "Full circle \u00e2\u20ac\u201d back to the opening view but now the viewer understands every piece. Hypnotic ticking is the payoff.",
+      "sound": "Crisp real-time tick/tock at 8Hz. Clean, satisfying, hypnotic.",
+      "hud": "FREQ: 28,800 VPH | TICKS/SEC: 8 | SPRING: 100% | TIME SCALE: 1\u00c3\u2014"
+    }
+  ],
+  "transitions": [
+    {
+      "from": "A",
+      "to": "B",
+      "type": "hard_cut",
+      "at_s": 6.0,
+      "carry": "Pallet fork lift is the trigger. Tick/tock stops abruptly."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "type": "smooth_zoom",
+      "at_s": 11.5,
+      "carry": "Rewind settles into tight escapement view. Ticking resumes."
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "type": "time_ramp",
+      "at_s": 16.5,
+      "carry": "Same escapement view, time slows 50\u00c3\u2014. Sound deepens."
+    },
+    {
+      "from": "D",
+      "to": "E",
+      "type": "smooth_pan",
+      "at_s": 25.0,
+      "carry": "Pan from escapement to balance wheel. Ruby glow links them."
+    },
+    {
+      "from": "E",
+      "to": "F",
+      "type": "pull_back",
+      "at_s": 33.0,
+      "carry": "Balance wheel stays centered as camera reveals full movement. Time ramps to real."
+    }
+  ],
+  "review_frames_s": [
+    0.5,
+    6.5,
+    12.0,
+    20.0,
+    29.0,
+    39.5
+  ],
+  "render_route": "Viz3D Chromium WebCodecs H.264 \u00e2\u2020\u2019 FFmpeg AAC mux",
+  "fallback": "Software WebGL (--disable-gpu) if GPU capture fails",
+  "simplifications": [
+    "Escape wheel has 15 teeth (real Swiss lever has 15-21). Simplified geometry.",
+    "Gear train ratios are visually representative, not exact watchmaking ratios.",
+    "Hairspring is a flat spiral (real Breguet overcoil omitted for clarity).",
+    "Movement plate shown as single layer (real movements have multiple plates and bridges)."
+  ],
+  "director_gates": {
+    "gate_1_plan": "Complete \u00e2\u20ac\u201d all beats have viewer action, camera, and cross-cut continuity.",
+    "gate_2_style": "Single 3D treatment throughout. 8-bit pixel quantization skin applied as post-process. Metallic/emissive materials match EV motor quality bar.",
+    "gate_3_preview": "9.5\u201313.5s preview rendered and decoded; 16 sequential frames inspected across rewind-to-escapement transition. Deterministic seek and audio impulse timing checks pass.",
+    "gate_4_delivery": "42.000s H.264/AAC master exported at 1080x1920, 60fps, 2520 frames. Complete stream decoded without errors. Six-frame sheets reviewed in portrait and landscape, plus 12 sampled full-cut frames and 16 transition frames. Narration absent; review is SFX-only and sampled visual review."
+  },
+  "duration": 42,
+  "narration_source": "User script preserved verbatim; no voice recording supplied. SFX-only preview.",
+  "asset_sources": [
+    {
+      "file": "tick.wav / tick2.wav",
+      "author": "cemkalyoncu",
+      "license": "CC0",
+      "url": "https://opengameart.org/content/tick-and-tock"
+    },
+    {
+      "file": "fan_interval.wav",
+      "author": "qubodup",
+      "license": "CC0",
+      "url": "https://opengameart.org/content/defect-motor-loop"
+    }
+  ],
+  "implementation_notes": [
+    "Existing Viz3D renderer retained. tools/render.py delegates to it. Output dimensions added as optional CLI flags with original defaults.",
+    "stage.safeBox() is production-local. No alternate engine imported.",
+    "Native 3D pass rendered at one-third output dimensions, nearest-neighbour upscale, quantized colour. HUD uses a texture on a camera-facing 3D card.",
+    "Illustrative escapement follows the requested one-tooth-per-impulse representation; not a watchmaking simulation.",
+    "691,200 nominal beats/day at 8 ticks/sec. Script wording is unchanged. Mechanical rate has real-world deviation.",
+    "42-second SFX preview uses the supplied cue timings without generated voice or subtitles."
+  ],
+  "verification": {
+    "portrait": "PASS",
+    "landscape": "PASS",
+    "landscape_capture": "1920x1080 H.264 smoke capture PASS",
+    "seek": "20s -> 4s -> 20s identical PNG bytes",
+    "sfx_sync": "210 impulses match visual simulation within 0.1ms quantization",
+    "duration_s": 42,
+    "video_frames": 2520
+  }
+}
