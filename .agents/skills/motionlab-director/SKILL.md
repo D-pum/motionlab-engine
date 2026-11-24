@@ -11,6 +11,8 @@ Act as the director for the agent producing the video. Follow the current brief,
 
 Read the project `AGENTS.md` and `SOURCES.md`. Resolve the current script, source material, requested deliverables and any required research. Preserve approved narration verbatim. Check local tool and asset availability before choosing a dependency. Start new films in workflows/viz3d/README.md. Direct each treatment within the same Viz3D production timeline. Read the relevant style skills and their references. Load the material the production needs and reuse it across scenes.
 
+When a shot needs a custom 3D model, use the [3D Asset Associate](../motionlab-3d-asset-associate/SKILL.md). Pass along the user's direct art direction or the shot brief, including what must move.
+
 ## Direct in one pass
 
 Target three minutes of creative planning once the brief and resources are ready. Identify the opening image, the story beats and the final payoff. For each beat, state what the viewer should learn or feel and what visible action delivers it. Give the strongest beats the most production effort.

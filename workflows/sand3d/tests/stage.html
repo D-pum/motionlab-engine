@@ -1,0 +1,85 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Sand3D tractor integration test</title>
+<style>body { margin: 0 } canvas { display: block; width: 100vw; height: 100vh }</style>
+<canvas id="stage"></canvas>
+<script src="../../workflows/viz3d/viz3d.js"></script>
+<script id="tractor-glb" src="assets/tractor/tractor.glb.js"></script>
+<script>
+const { THREE, GLTFLoader } = Viz3D;
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("stage"), antialias: true });
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x283646);
+scene.add(new THREE.HemisphereLight(0xfff4da, 0x839ab4, 2.2));
+const sun = new THREE.DirectionalLight(0xffffff, 2.4);
+sun.position.set(3, 5, 2);
+scene.add(sun);
+const camera = new THREE.PerspectiveCamera(33, 9 / 16, 0.1, 30);
+camera.position.set(6.8, 3.8, 4.5);
+camera.lookAt(0, 0.76, 0);
+
+let axle, axis, rest, loadError;
+function check(ok, message) {
+  if (!ok) throw new Error(message);
+}
+function seek(seconds) {
+  axle.quaternion.copy(rest);
+  axle.rotateOnAxis(axis, seconds * Math.PI);
+  scene.updateMatrixWorld(true);
+}
+function verifyTractor(model) {
+  const named = name => {
+    const part = model.getObjectByName(name);
+    check(part, "Missing GLB node " + name);
+    return part;
+  };
+  axle = named("axle_rear_right");
+  const joint = axle.userData.s3d_joint;
+  check(joint.type === "continuous", "Expected continuous rear axle");
+  axis = new THREE.Vector3().fromArray(joint.axis).normalize();
+  rest = axle.quaternion.clone();
+  const wheel = named("wheel_rear_right");
+  check(wheel.parent === axle, "Rear wheel must be parented to its axle");
+  const chassis = named("chassis");
+  const fixed = [chassis, ...["front_left", "front_right", "rear_left"].map(p => named("wheel_" + p))];
+  const center = node => new THREE.Box3().setFromObject(node, true).getCenter(new THREE.Vector3());
+  const tire = named("tire_rear_right");
+  const marker = named("marker_rear_right");
+  const near = (a, b) => a.distanceTo(b) < 0.00001;
+  seek(0);
+  const pivot = axle.getWorldPosition(new THREE.Vector3());
+  const along = new THREE.Vector3(1, 0, 0);
+  check(near(pivot, new THREE.Vector3(0.51, 0.42, -0.68)), "Wrong axle position or model units");
+  check(near(axis.clone().transformDirection(axle.matrixWorld), along), "Axle must point along X");
+  check(near(center(tire), pivot), "Wheel is off-centre");
+  const size = new THREE.Box3().setFromObject(chassis, true).getSize(new THREE.Vector3());
+  check(near(size, new THREE.Vector3(0.72, 0.23, 2.05)), "Wrong chassis dimensions");
+  const start = center(marker);
+  const before = fixed.map(node => node.matrixWorld.clone());
+  const expected = start.clone().sub(pivot).applyAxisAngle(along, Math.PI / 2).add(pivot);
+  seek(0.5);
+  check(start.distanceTo(center(marker)) > 0.1 && near(center(marker), expected), "Rim marker missed its quarter-turn");
+  check(near(center(tire), pivot), "Axle drift after rotation");
+  check(fixed.every((node, i) => node.matrixWorld.equals(before[i])), "Another wheel or chassis moved");
+  seek(0);
+  check(near(center(marker), start), "Seeking to rest did not restore the rim");
+}
+
+let ready = false;
+window.OPENER = {
+  get ready() { if (loadError) throw loadError; return ready; },
+  resize(w, h) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  },
+  seek(seconds) { seek(seconds); renderer.render(scene, camera); }
+};
+new GLTFLoader().loadAsync(document.getElementById("tractor-glb").dataset.url)
+  .then(({ scene: model }) => {
+    scene.add(model);
+    verifyTractor(model);
+    ready = true;
+  })
+  .catch(error => { loadError = error; });
+</script>

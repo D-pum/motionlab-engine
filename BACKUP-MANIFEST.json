@@ -12,14 +12,19 @@
       "sha256": "6d5e38eb1412ce9974f73044221477b062fc99d82dbef1c885cc3b4cf95a6be6"
     },
     {
+      "path": ".agents/skills/motionlab-3d-asset-associate/SKILL.md",
+      "bytes": 1029,
+      "sha256": "6f19c197e16ab2b8a8f64a4a94ad60e34910647900b89c98890e20962ec3ab0e"
+    },
+    {
       "path": ".agents/skills/motionlab-director/agents/openai.yaml",
       "bytes": 215,
       "sha256": "b59965e4827cd1e5c52adc3f8cedbbd3f5613df271d27048701acf0de2d04b0b"
     },
     {
       "path": ".agents/skills/motionlab-director/SKILL.md",
-      "bytes": 5936,
-      "sha256": "1c66fa3178da76bdc45cc8f5909eed465ff5706c2eb20449e7014f5041ac0ad1"
+      "bytes": 6136,
+      "sha256": "615a8c255acc16d6b2697ddea70c60c7aa24585b0401bd3c0c431ad9bdefde8e"
     },
     {
       "path": ".agents/skills/video-scriptwriting/SKILL.md",
@@ -6685,6 +6690,31 @@
       "path": "viz3d-lessons.md",
       "bytes": 484,
       "sha256": "8543093d657d045bd585ffd68f019a0d2f79db4ce6ff1c6d04ba951bc95939d5"
+    },
+    {
+      "path": "workflows/sand3d/embed_glb.py",
+      "bytes": 822,
+      "sha256": "0769ba349adef705fedbb346c85fa7c0719bf8122ed7c7eec63922aa08f85104"
+    },
+    {
+      "path": "workflows/sand3d/README.md",
+      "bytes": 3829,
+      "sha256": "377361c2045dd31daf490e16a7057bed752a128ef6be7c01a7277d52ae3b38db"
+    },
+    {
+      "path": "workflows/sand3d/requirements.txt",
+      "bytes": 25,
+      "sha256": "c2eedf5b52bcab3aca9ed3f718acff903226cd87b2294ca251ab9567660d40ab"
+    },
+    {
+      "path": "workflows/sand3d/tests/stage.html",
+      "bytes": 3661,
+      "sha256": "1c2f5bdfa8bc0d4dc560fb6b49050946249ec612f46e7ad3122b4ddecfeaa0ed"
+    },
+    {
+      "path": "workflows/sand3d/tests/tractor.py",
+      "bytes": 2211,
+      "sha256": "6c6aeb17506da17c8c19cb8ad4d8c54fa4cf2a350eb8beb1eed512567e6fff26"
     },
     {
       "path": "workflows/viz3d/README.md",
