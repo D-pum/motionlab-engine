@@ -13,8 +13,8 @@
     },
     {
       "path": ".agents/skills/motionlab-3d-asset-associate/SKILL.md",
-      "bytes": 1029,
-      "sha256": "6f19c197e16ab2b8a8f64a4a94ad60e34910647900b89c98890e20962ec3ab0e"
+      "bytes": 1813,
+      "sha256": "0092db9e9f0b1c13bc1e0ad9e7553d8b4c94ff1d18c521e370d9b836ba11917a"
     },
     {
       "path": ".agents/skills/motionlab-director/agents/openai.yaml",
@@ -23,8 +23,8 @@
     },
     {
       "path": ".agents/skills/motionlab-director/SKILL.md",
-      "bytes": 6136,
-      "sha256": "615a8c255acc16d6b2697ddea70c60c7aa24585b0401bd3c0c431ad9bdefde8e"
+      "bytes": 6317,
+      "sha256": "5b9f937397fb2c4abd8b093eb289b80ea14faa3210597d13b2ffaed033fadf44"
     },
     {
       "path": ".agents/skills/video-scriptwriting/SKILL.md",
