@@ -21,3 +21,13 @@ Contact sheets, sample frames, WAV mixes and rendered MP4s are generated outputs
 The escapement is an explanatory schematic following the requested one-tooth-per-impulse visual. Pallet contacts and gear ratios are representative. Physical Swiss lever geometry, balance inertia and manufacturing tolerances are simplified. The mainspring energy-release burst is a dramatization. At 8 ticks/second the nominal daily count is 691,200; the supplied script remains verbatim. Eight beats means four complete balance oscillations per second. Reference for frequency and real-world rate variation: https://www.grand-seiko.com/se-en/-/media/Files/Common/GrandSeiko/instructions/English/9S25_en.pdf
 
 Review passed deterministic seeking, impulse synchronization, portrait/landscape sheets, transition sequencing, complete video decoding and sampled visual inspection across the cut. This is an SFX preview pending the user's recording.
+
+## Finished review cut
+
+watch_review.mp4 adds crisp full-resolution component labels, beat-specific headings, lock/release callouts and 3D emphasis rings. The final 2.5 seconds contain only movement and SFX. Narration will be added later.
+
+Reproduce it with:
+
+```powershell
+.venv/Scripts/python.exe workflows/viz3d/render.py productions/07_mechanical_watch/index.html --audio productions/07_mechanical_watch/audio_mix.wav --duration 42 --fps 60 --output productions/07_mechanical_watch/watch_review.mp4
+```

@@ -62,6 +62,16 @@ for(let i=0;i<24;i++){const a=i*TAU/24;const o=ring(2.65+i*.004,.0025,steel);o.p
 for(const [x,y] of [[.24,-1.35],[1.2,-1.4]]){const p=cyl(.045,.25,steel);p.position.set(x,y,.57)}
 const ghosts=gears.concat([escape]).map(g=>{const o=g.clone();o.traverse(c=>{if(c.isMesh){c.material=c.material.clone();c.material.transparent=true;c.material.opacity=.16;c.material.depthWrite=false}});root.add(o);return o});
 const sparkMat=new T.MeshStandardMaterial({color:0xffef93,emissive:0xffb52f,emissiveIntensity:1.5});
+const emphasisRings = [
+  [-1.25, .95, .36, .75, 0x22d3ee],
+  [.85, -.45, .49, .67, 0xffc24b],
+  [-.70, -1.34, .80, .91, 0x22d3ee]
+].map(([x,y,z,r,color]) => {
+  const material = new T.MeshBasicMaterial({color, transparent:true, opacity:.65, depthWrite:false});
+  const halo = ring(r, .018, material);
+  halo.position.set(x,y,z);
+  return halo;
+});
 const spark=mesh(new T.IcosahedronGeometry(.07,0),sparkMat);
 const dial=new T.Group();root.add(dial);dial.position.set(0,0,1);
 ring(2.50,.028,steel,dial);dial.visible=false;
@@ -70,11 +80,120 @@ function hand(l,w,m,z){const group=new T.Group();dial.add(group);const o=mesh(ne
 const hands=[hand(2.25,.032,ruby,.12),hand(1.75,.075,white,.07),hand(1.2,.11,brass,.03)];cyl(.13,.13,ruby,dial).position.z=.14;
 const hudCanvas=document.createElement('canvas');hudCanvas.width=768;hudCanvas.height=260;const hc=hudCanvas.getContext('2d');
 const hudTex=new T.CanvasTexture(hudCanvas);hudTex.magFilter=T.NearestFilter;hudTex.minFilter=T.NearestFilter;
-const hud=new T.Mesh(new T.PlaneGeometry(4.2,1.42),new T.MeshBasicMaterial({map:hudTex,transparent:true,depthTest:false}));hud.renderOrder=20;scene.add(hud);
+const hud=new T.Mesh(new T.PlaneGeometry(4.2,1.42),new T.MeshBasicMaterial({map:hudTex,transparent:true,depthTest:false}));hud.renderOrder=20;hud.visible=false;scene.add(hud);
 const target=new T.WebGLRenderTarget(360,640,{minFilter:T.NearestFilter,magFilter:T.NearestFilter});
 const postScene=new T.Scene(),postCam=new T.OrthographicCamera(-1,1,1,-1,0,1);
 const postMat=new T.ShaderMaterial({uniforms:{image:{value:target.texture}},vertexShader:'varying vec2 uv0;void main(){uv0=uv;gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:'uniform sampler2D image;varying vec2 uv0;void main(){vec4 c=texture2D(image,uv0);vec3 a=c.rgb*1.6;vec3 rgb=pow(clamp((a*(2.51*a+.03))/(a*(2.43*a+.59)+.14),0.,1.),vec3(1./2.2));gl_FragColor=vec4(floor(rgb*31.+.5)/31.,1.);}'});
 postScene.add(new T.Mesh(new T.PlaneGeometry(2,2),postMat));
+
+// Full-resolution typography stays crisp over the pixel-quantized mechanical pass.
+const labelCanvas = document.createElement("canvas");
+const labelContext = labelCanvas.getContext("2d");
+const labelTexture = new T.CanvasTexture(labelCanvas);
+labelTexture.minFilter = labelTexture.magFilter = T.LinearFilter;
+const labelScene = new T.Scene();
+const labelCamera = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+const labelMaterial = new T.MeshBasicMaterial({
+  map: labelTexture, transparent: true, depthTest: false, depthWrite: false
+});
+labelScene.add(new T.Mesh(new T.PlaneGeometry(2, 2), labelMaterial));
+
+function drawLabels(t, st) {
+  if (labelCanvas.width !== width || labelCanvas.height !== height) {
+    labelCanvas.width = width;
+    labelCanvas.height = height;
+    labelTexture.dispose();
+  }
+  const context = labelContext;
+  context.clearRect(0, 0, width, height);
+  const portrait = height > width;
+  const scale = portrait ? width / 1080 : height / 1080;
+  const left = width * .075;
+  const top = portrait ? 290 : 76;
+  const colors = { white: "#effaff", cyan: "#67e8f9", red: "#ff6868", gold: "#ffd477" };
+  function text(value, x, y, size, color, weight = 700) {
+    context.font = weight + " " + Math.round(size * scale) + "px monospace";
+    context.textBaseline = "top";
+    context.fillStyle = color;
+    context.shadowColor = "#000000";
+    context.shadowBlur = 14 * scale;
+    context.fillText(value, x, y);
+    context.shadowBlur = 0;
+  }
+  function tag(value, point, color, offsetX = 0, offsetY = 0) {
+    const screen = point.clone().project(camera);
+    const fontSize = 25 * scale;
+    context.font = "700 " + Math.round(fontSize) + "px monospace";
+    const boxWidth = context.measureText(value).width + 30 * scale;
+    const x = clamp((screen.x + 1) * width / 2 + offsetX * scale, left, width - left - boxWidth);
+    const y = clamp((1 - screen.y) * height / 2 + offsetY * scale,
+                    top + 190 * scale, (portrait ? 1280 : 820) * scale);
+    context.fillStyle = "rgba(5, 14, 24, .94)";
+    context.fillRect(x, y, boxWidth, 47 * scale);
+    context.fillStyle = color;
+    context.fillRect(x, y, 5 * scale, 47 * scale);
+    text(value, x + 16 * scale, y + 10 * scale, 25, color);
+  }
+  let headline, detail, accent = colors.cyan;
+  if (t < 6) {
+    headline = "ZERO BATTERIES.";
+    detail = "HOW A MECHANICAL WATCH KEEPS TIME";
+  } else if (t < 10.5) {
+    headline = "GATE REMOVED";
+    detail = "STORED ENERGY. RELEASED IN 0.6s.";
+    accent = colors.red;
+  } else if (t < 11.5) {
+    headline = "REWIND";
+    detail = "RESTORE THE MECHANICAL GATE";
+  } else if (t < 16.5) {
+    headline = "THE ESCAPEMENT";
+    detail = "LOCK. RELEASE. REPEAT.";
+  } else if (t < 25) {
+    headline = "50x SLOW MOTION";
+    detail = st.u < .18 ? "RELEASE / IMPULSE" : "LOCKED / WAIT FOR THE NEXT SWING";
+    accent = st.u < .18 ? colors.gold : colors.cyan;
+  } else if (t < 33) {
+    headline = "THE BALANCE WHEEL";
+    detail = "4 Hz  /  8 BEATS EVERY SECOND";
+  } else {
+    headline = "TICKS BECOME TIME";
+    detail = "SECONDS. MINUTES. HOURS.";
+    accent = colors.gold;
+  }
+  const fade = t < .2 ? smooth(t / .2) : t >= 39 ? 1 - smooth((t - 39) / .5) : 1;
+  context.globalAlpha = fade;
+  text(detail, left, top, portrait ? 23 : 23, accent);
+  text(headline, left, top + 43 * scale, portrait ? 55 : 48, colors.white);
+  if (t >= .8 && t < 5.8) {
+    tag("MAINSPRING / STORED ENERGY", barrel.position, colors.cyan, -160, -50);
+  } else if (t >= 12 && t < 16.5) {
+    tag("15-TOOTH ESCAPE WHEEL", escape.position, colors.gold, 35, -65);
+    tag("RUBY PALLET FORK", fork.position, colors.red, -150, 90);
+  } else if (t >= 16.5 && t < 25) {
+    tag(st.u < .18 ? "ONE IMPULSE" : "PALLET LOCK", new T.Vector3(.8, -.8, .6),
+        st.u < .18 ? colors.gold : colors.red, -170, 95);
+  } else if (t >= 25 && t < 33) {
+    tag("BREATHING HAIRSPRING", hairGroup.position, colors.cyan, -150, 90);
+  } else if (t >= 34.5 && t < 39.5) {
+    tag("GEAR TRAIN", gears[1].position, colors.gold, 45, -70);
+  }
+  const hudY = portrait ? 1370 : height - 150;
+  const cellWidth = (width - left * 2) / 4;
+  const values = [
+    ["FREQ (VPH)", "28,800"],
+    ["TICKS/SEC", st.chaos ? "FREE" : st.rate.toFixed(st.rate < 1 ? 2 : 0)],
+    ["SPRING %", String(Math.round(t < 6 ? 100 : t < 10.5 ? 100 * (1 - smooth((t - 6) / .6)) : 100 * smooth(t - 10.5)))],
+    ["TIME SCALE", t >= 16.5 && t < 25 ? "50x SLOW" : st.chaos ? "FREE" : t >= 25 && t < 33 ? (8 / st.rate).toFixed(1) + "x" : "1x"]
+  ];
+  values.forEach((entry, index) => {
+    const x = left + index * cellWidth;
+    text(entry[0], x, hudY, portrait ? 23 : 24, "#a9bdcc");
+    text(entry[1], x, hudY + 36 * scale, portrait ? 36 : 36, index === 2 && st.chaos ? colors.red : accent);
+  });
+  context.globalAlpha = 1;
+  labelTexture.needsUpdate = true;
+}
+
 let width=1080,height=1920;
 const stage={safeBox(){return {x:width*.07,y:height>width?height*.15:height*.07,width:width*.86,height:height>width?height*.62:height*.86}},resize(w,h){width=w;height=h;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();target.setSize(Math.round(w/3),Math.round(h/3));}};
 function sim(t){if(t<16.5)return t;if(t<25)return 16.5+(t-16.5)/50;if(t<33){const u=t-25;return 16.67+u*.5+u*u/32}return 22.67+t-33}
@@ -88,6 +207,10 @@ const shots=[
 [11.5,[.72,-.8,.5],4.3],[14,[.85,-.65,.5],3.8],[16.5,[.85,-.75,.5],3.15],[19.5,[.8,-.8,.5],2.85],[22.5,[.72,-.9,.5],3.2],
 [25,[-.7,-1.34,.6],3.7],[28,[-.7,-1.34,.6],3.2],[30.5,[-.7,-1.34,.6],3.8],[33,[0,0,.3],8.8],[36,[0,0,.3],8.2],[39.5,[0,0,.3],8.5]];
 function seek(t){t=clamp(t,0,42);const st=state(t);
+ emphasisRings.forEach((halo,index) => {
+   halo.visible = index === 0 ? t < 6 : index === 1 ? t >= 11.5 && t < 25 : t >= 25 && t < 33;
+   halo.material.opacity = .35 + .30 * Math.pow(Math.sin(t * Math.PI * 1.5), 2);
+ });
  gears.forEach((g,i)=>g.rotation.z=(st.n+st.step)*TAU/[480,-144,64][i]+st.extra*(i%2?-1:1)*(i+1));
  escape.rotation.z=-(st.n+st.step)*TAU/15+st.extra*4;
  ghosts.forEach((g,i)=>{const source=[...gears,escape][i];g.visible=st.chaos;g.position.copy(source.position);g.rotation.z=source.rotation.z+.04+.1*Math.sin(t*90+i)});
@@ -109,6 +232,7 @@ function seek(t){t=clamp(t,0,42);const st=state(t);
  const hudDistance=6,hsize=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*hudDistance;
  hud.position.copy(camera.position).add(new T.Vector3(0,-hsize*(camera.aspect<1?.23:.34),-hudDistance).applyQuaternion(camera.quaternion));hud.scale.setScalar(Math.min(hsize*camera.aspect*.86/4.2,hsize*(camera.aspect<1?.14:.19)/1.42));
  renderer.setRenderTarget(target);renderer.render(scene,camera);renderer.setRenderTarget(null);renderer.render(postScene,postCam);
+ drawLabels(t,st);renderer.autoClear=false;renderer.clearDepth();renderer.render(labelScene,labelCamera);renderer.autoClear=true;
  window.watchState={...st,safeBox:stage.safeBox(),t};
 }
 window.watch={state,sim,shots};window.OPENER={ready:true,resize:stage.resize,seek};stage.resize(1080,1920);seek(0);

@@ -6768,8 +6768,8 @@
     },
     {
       "path": "productions/07_mechanical_watch/scene.js",
-      "bytes": 12383,
-      "sha256": "b4eacc1011096b15484fb338c5cf4c794ec560ab8f7acb4387430e45180245b2"
+      "bytes": 18048,
+      "sha256": "861fb82c0bc7a2abdf7c9f15a704fe95f7b3b32a24d5b88837454f5f2164ad6c"
     },
     {
       "path": "productions/07_mechanical_watch/index.html",
@@ -6778,8 +6778,8 @@
     },
     {
       "path": "productions/07_mechanical_watch/production-plan.json",
-      "bytes": 11523,
-      "sha256": "3298739a9e561e4a73e4bff5463bbeeb9db3ba6ded0a69998fdcbd97599b68db"
+      "bytes": 12079,
+      "sha256": "25bdc899ce954614004254100b9b33801e43e7fa9042a6713bbda7189a5c9c8b"
     },
     {
       "path": "productions/07_mechanical_watch/gen_sfx.py",
@@ -6793,8 +6793,8 @@
     },
     {
       "path": "productions/07_mechanical_watch/README.md",
-      "bytes": 2234,
-      "sha256": "640e33cddf9390a589424d84c9885ec3c07307c4e5d8a992bf673ee0fbd42101"
+      "bytes": 2752,
+      "sha256": "3abdd83f5efcbd00edd227e174aa815cc7975b7444d7ae48c24c2ac33b1de589"
     },
     {
       "path": "productions/07_mechanical_watch/CREDITS.md",

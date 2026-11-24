@@ -230,5 +230,19 @@
     "sfx_sync": "210 impulses match visual simulation within 0.1ms quantization",
     "duration_s": 42,
     "video_frames": 2520
+  },
+  "delivery": {
+    "review_file": "watch_review.mp4",
+    "audio": "SFX only; user narration to be added later",
+    "labels": [
+      "Opening title",
+      "Mainspring / stored energy",
+      "Gate removed / 0.6s release",
+      "Escapement / ruby pallet fork / escape wheel",
+      "50x slow motion / pallet lock / impulse",
+      "Balance wheel / breathing hairspring / 4Hz",
+      "Gear train / seconds, minutes, hours"
+    ],
+    "ending": "All labels and HUD fade out by 39.5s, leaving 2.5 seconds of pure movement and ticking."
   }
 }
