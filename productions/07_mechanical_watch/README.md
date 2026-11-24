@@ -31,3 +31,17 @@ Reproduce it with:
 ```powershell
 .venv/Scripts/python.exe workflows/viz3d/render.py productions/07_mechanical_watch/index.html --audio productions/07_mechanical_watch/audio_mix.wav --duration 42 --fps 60 --output productions/07_mechanical_watch/watch_review.mp4
 ```
+
+
+## Narrated master
+
+watch_final_narrated.mp4 is 55.5 seconds at 1080x1920, 60 fps. The user supplied assets/Watch.wav (53.32 seconds). Its natural pace is preserved. narrated_timing.js maps the approved sections to the recording's six spoken sections. Labels fade by 53 seconds and the movement continues through the ticking tail.
+
+The source recording and generated WAV/MP4 files remain local. Reproduce the master after placing the user's recording in assets/Watch.wav:
+
+```powershell
+ffmpeg -i productions/07_mechanical_watch/assets/Watch.wav -af "highpass=f=65,loudnorm=I=-16:TP=-2:LRA=7" -ar 48000 -c:a pcm_s24le productions/07_mechanical_watch/narrated/voice_normalized.wav
+.venv/Scripts/python.exe productions/07_mechanical_watch/prepare_narrated.py
+.venv/Scripts/python.exe tools/audio_mix.py productions/07_mechanical_watch/narrated --duration 55.5 --voice productions/07_mechanical_watch/narrated/voice_normalized.wav
+.venv/Scripts/python.exe workflows/viz3d/render.py productions/07_mechanical_watch/narrated.html --audio productions/07_mechanical_watch/narrated/audio_mix.wav --duration 55.5 --fps 60 --output productions/07_mechanical_watch/watch_final_narrated.mp4
+```
